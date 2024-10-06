@@ -8,5 +8,4 @@ public class Item : ScriptableObject
     public string name;
     public int stackSize;
     public Sprite icon;
-    public int count;
 }

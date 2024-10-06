@@ -16,6 +16,8 @@ public class OutsideEQ : MonoBehaviour, IDropHandler
         if (EQManager.ItemCursorHolder != null) {
 
             EQManager.OriginalSlot.GetComponent<SlotHolder>().item = EQManager.ItemCursorHolder;
+            EQManager.OriginalSlot.GetComponent<SlotHolder>().count = EQManager.OriginalCount;
+            EQManager.OriginalSlot.GetComponent<SlotHolder>().ctext.text = EQManager.OriginalSlot.GetComponent<SlotHolder>().count.ToString();
             EQManager.ItemCursorHolder = null;
             EQManager.UpdateSlots();
         }

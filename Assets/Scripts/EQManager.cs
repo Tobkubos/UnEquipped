@@ -11,6 +11,7 @@ public class EQManager : MonoBehaviour
 
     public Item ItemCursorHolder;
     public GameObject OriginalSlot;
+    public int OriginalCount;
 
     void Start()
     {
@@ -23,8 +24,15 @@ public class EQManager : MonoBehaviour
 
         Slots[0].GetComponent<SlotHolder>().item = items[1];
         Slots[1].GetComponent<SlotHolder>().item = items[2];
-
+        Slots[2].GetComponent<SlotHolder>().item = items[2];
+        Slots[3].GetComponent<SlotHolder>().item = items[2];
+        Slots[4].GetComponent<SlotHolder>().item = items[2];
         UpdateSlots();
+
+        for (int i = 0; i < Slots.Length; i++) 
+        {
+            Slots[i].GetComponent<SlotHolder>().InitNumbers();
+        }
     }
 
     public void UpdateSlots()
@@ -34,7 +42,7 @@ public class EQManager : MonoBehaviour
             if (Slots[i].GetComponent<SlotHolder>().item != null)
             {
                 Slots[i].GetComponent<Image>().sprite = Slots[i].GetComponent<SlotHolder>().item.icon;
-                //Slots[i].GetComponent<SlotHolder>().ctext.text = Slots[i].GetComponent<SlotHolder>().count.ToString();
+                Slots[i].GetComponent<SlotHolder>().ctext.text = Slots[i].GetComponent<SlotHolder>().count.ToString();
             }
             else
             {
