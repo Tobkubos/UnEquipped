@@ -7,7 +7,7 @@ public class EQManager : MonoBehaviour
 {
     public GameObject[] Slots;
     public List<Item> items = new List<Item>();
-
+    RecipeManager RecipeManager;
 
     public Item ItemCursorHolder;
     public GameObject OriginalSlot;
@@ -15,24 +15,29 @@ public class EQManager : MonoBehaviour
 
     void Start()
     {
+        RecipeManager = GameObject.Find("RecipeManager").GetComponent<RecipeManager>();
         for (int i = 0; i < Slots.Length; i++)
         {
             Slots[i].GetComponent<SlotHolder>().item = items[0];
             Slots[i].GetComponent<SlotHolder>().ctext.text = "";
         }
 
-
+        /*
         Slots[0].GetComponent<SlotHolder>().item = items[1];
         Slots[1].GetComponent<SlotHolder>().item = items[2];
         Slots[2].GetComponent<SlotHolder>().item = items[2];
         Slots[3].GetComponent<SlotHolder>().item = items[2];
         Slots[4].GetComponent<SlotHolder>().item = items[2];
+        */
+
         UpdateSlots();
 
         for (int i = 0; i < Slots.Length; i++) 
         {
             Slots[i].GetComponent<SlotHolder>().InitNumbers();
         }
+        RecipeManager.ShowRecipes();
+        RecipeManager.CheckIngredients();
     }
 
     public void UpdateSlots()
@@ -60,6 +65,7 @@ public class EQManager : MonoBehaviour
             {
                 Slots[i].GetComponent<SlotHolder>().count += 1;
                 UpdateSlots();
+                RecipeManager.CheckIngredients();
                 return;
             }
         }
@@ -71,6 +77,7 @@ public class EQManager : MonoBehaviour
                 Slots[i].GetComponent<SlotHolder>().item = items[id];
                 Slots[i].GetComponent<SlotHolder>().count += 1;
                 UpdateSlots();
+                RecipeManager.CheckIngredients();
                 return;
             }
         }

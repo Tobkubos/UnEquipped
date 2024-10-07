@@ -10,13 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e99ba6d73b8f4ba4d990adb6b43d9073, type: 3}
-  m_Name: Stone Pickaxe
+  m_Name: Furnace
   m_EditorClassIdentifier: 
   stackSize: 1
-  icon: {fileID: 0}
   itemsForRecipe:
-  - item: {fileID: 11400000, guid: 525e42b312c324d43a3516462e8af60b, type: 2}
-    count: 2
   - item: {fileID: 11400000, guid: 850eee4c4684b6b4194f931c7ced8ba1, type: 2}
-    count: 3
-  Product: {fileID: 11400000, guid: 9a97748d846349548b8f17588d76a863, type: 2}
+    count: 8
+  Product: {fileID: 11400000, guid: daead5d31d179a3429fad8e03e5540ad, type: 2}

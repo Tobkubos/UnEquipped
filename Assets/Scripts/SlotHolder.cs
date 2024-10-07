@@ -13,7 +13,6 @@ public class SlotHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public TextMeshProUGUI ctext;
     public int count;
     public Image icon;
-    private Transform originalParent;
     Image temp;
 
     Canvas EQCanva;

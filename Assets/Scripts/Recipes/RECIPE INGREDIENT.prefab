@@ -32,9 +32,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2828104967943219710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -37.0979, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -37.098, y: -35.515198}
   m_SizeDelta: {x: 74.1968, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5720793022247622188
@@ -166,10 +166,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2828104967943219710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 229.06, y: 0}
-  m_SizeDelta: {x: 273.49, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 192, y: -35.515198}
+  m_SizeDelta: {x: 244.1734, y: 31.030502}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6645975025637573715
 CanvasRenderer:
@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 2828104967943219710}
   - component: {fileID: 8540458936443248367}
   - component: {fileID: 2363098206981141408}
+  - component: {fileID: 6640539884931384658}
   m_Layer: 5
   m_Name: RECIPE INGREDIENT
   m_TagString: Untagged
@@ -306,7 +307,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 440, y: 80}
+  m_SizeDelta: {x: 440, y: 70}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8540458936443248367
 CanvasRenderer:
@@ -346,6 +347,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6640539884931384658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845493544565209913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121b41bb87a00d547ac8f1f115028815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientImage: {fileID: 4750236840982772789}
+  ingredientName: {fileID: 2915956504830526247}
+  ingredientCount: {fileID: 7675445399953434606}
 --- !u!1 &7334223544210752432
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,10 +394,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2828104967943219710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 45.399994, y: 0}
-  m_SizeDelta: {x: 60.950195, y: 60.9502}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 36.3463, y: -33.9464}
+  m_SizeDelta: {x: 42.8429, y: 42.842896}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6882637328732615404
 CanvasRenderer:
