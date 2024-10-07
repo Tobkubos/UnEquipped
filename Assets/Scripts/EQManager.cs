@@ -50,4 +50,31 @@ public class EQManager : MonoBehaviour
             }
         }
     }
+
+    public void GiveItem()
+    {
+        int id = Random.Range(1, items.Count);
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            if (Slots[i].GetComponent<SlotHolder>().item.id == id && Slots[i].GetComponent<SlotHolder>().count < Slots[i].GetComponent<SlotHolder>().item.stackSize)
+            {
+                Slots[i].GetComponent<SlotHolder>().count += 1;
+                UpdateSlots();
+                return;
+            }
+        }
+
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            if (Slots[i].GetComponent<SlotHolder>().item.id == 0)
+            {
+                Slots[i].GetComponent<SlotHolder>().item = items[id];
+                Slots[i].GetComponent<SlotHolder>().count += 1;
+                UpdateSlots();
+                return;
+            }
+        }
+
+        Debug.Log("FULL EQ");
+    }
 }

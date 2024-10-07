@@ -45,6 +45,7 @@ public class SlotHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             icon.sprite = item.icon;
             temp = Instantiate(icon, EQCanva.transform);
             temp.transform.position = eventData.position;
+            temp.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = EQManager.OriginalCount.ToString();
             temp.raycastTarget = false;
             EQManager.ItemCursorHolder = item;
             item = EQManager.items[0];
@@ -131,6 +132,25 @@ public class SlotHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                 {
                     int toMaxStack = droppedOnSlot.item.stackSize - droppedOnSlot.count;
 
+                    //ZAMIEN MIEJSCAMI JEZELI FULL STACK
+                    if (toMaxStack == 0)
+                    {
+                        int tempCount = droppedOnSlot.count;
+
+                        EQManager.OriginalSlot.GetComponent<SlotHolder>().item = droppedOnSlot.item;
+                        droppedOnSlot.item = EQManager.ItemCursorHolder;
+
+
+                        droppedOnSlot.count = EQManager.OriginalCount;
+                        droppedOnSlot.ctext.text = droppedOnSlot.count.ToString();
+
+                        EQManager.OriginalSlot.GetComponent<SlotHolder>().count = tempCount;
+                        EQManager.OriginalSlot.GetComponent<SlotHolder>().ctext.text = EQManager.OriginalSlot.GetComponent<SlotHolder>().count.ToString();
+
+                        EQManager.ItemCursorHolder = null;
+                        EQManager.UpdateSlots();
+                        return;
+                    }
 
                     droppedOnSlot.count += toMaxStack;
                     droppedOnSlot.ctext.text = droppedOnSlot.count.ToString();
