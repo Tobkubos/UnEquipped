@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Stone Pickaxe
   m_EditorClassIdentifier: 
   stackSize: 1
-  icon: {fileID: 0}
   itemsForRecipe:
-  - item: {fileID: 11400000, guid: 525e42b312c324d43a3516462e8af60b, type: 2}
-    count: 2
   - item: {fileID: 11400000, guid: 850eee4c4684b6b4194f931c7ced8ba1, type: 2}
     count: 3
+  - item: {fileID: 11400000, guid: 525e42b312c324d43a3516462e8af60b, type: 2}
+    count: 2
   Product: {fileID: 11400000, guid: 9a97748d846349548b8f17588d76a863, type: 2}

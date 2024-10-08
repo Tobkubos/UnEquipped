@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecipeManager : MonoBehaviour
 {
     public Recipe[] Recipes;
+    public List<RecipeInfo> RecipesOnCanva = new List<RecipeInfo>(); 
+
 
     public GameObject RecipeList;
     public GameObject RecipeTemplate;
-
-    EQManager EQManager;
-    private void Start()
+    bool NoIngredients;
+    public EQManager EQManager;
+    private void Awake()
     {
-        EQManager = GameObject.Find("EQManager").GetComponent<EQManager>();
         //ShowRecipes();
         //CheckIngredients();
     }
@@ -45,16 +48,21 @@ public class RecipeManager : MonoBehaviour
             GameObject RecipeTemp = Instantiate(RecipeTemplate, RecipeList.transform);
             RecipeTemp.GetComponent<RecipeInfo>().name.text = Recipes[i].Product.name;
             RecipeTemp.GetComponent<RecipeInfo>().image.sprite = Recipes[i].Product.icon;
- 
+            RecipesOnCanva.Add(RecipeTemp.GetComponent<RecipeInfo>());
 
-            
-            for(int j = 0; j < Recipes[i].itemsForRecipe.Length; j++)
+            int index = i;
+            RecipeTemp.GetComponent<RecipeInfo>().image.GetComponent<Button>().onClick.AddListener(() => {
+                Debug.Log("PREPARING ITEM " + Recipes[index].Product.name);
+                EQManager.GiveItem(Recipes[index]);
+            });
+
+            for (int j = 0; j < Recipes[i].itemsForRecipe.Length; j++)
             {
                 GameObject ingredient = Instantiate(RecipeTemp.GetComponent<RecipeInfo>().RecipeIngredientTemplate, RecipeTemp.GetComponent<RecipeInfo>().RecipeIngredientsList.transform);
-                ingredient.GetComponent<IngredientInfo>().ingredientName.text = Recipes[i].itemsForRecipe[j].item.name;
                 ingredient.GetComponent<IngredientInfo>().ingredientCount.text = "x" + Recipes[i].itemsForRecipe[j].count;
                 ingredient.GetComponent<IngredientInfo>().ingredientImage.sprite = Recipes[i].itemsForRecipe[j].item.icon;
-                RecipeTemp.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 70);
+                RecipeTemp.GetComponent<RecipeInfo>().ingredientsOnCanva.Add(ingredient.GetComponent<IngredientInfo>());
+                //RecipeTemp.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 70);
             }
             
         }
@@ -63,19 +71,31 @@ public class RecipeManager : MonoBehaviour
     public void CheckIngredients()
     {
         
-        foreach(Recipe recipe in Recipes)
+        for(int j = 0; j< RecipesOnCanva.Count; j++)
         {
-            for (int i = 0; i < recipe.itemsForRecipe.Length; i++)
+            NoIngredients = false;
+            for(int i = 0; i< RecipesOnCanva[j].ingredientsOnCanva.Count; i++ )
             {
-                bool AreItemsInEQ = CheckForItems(recipe.itemsForRecipe[i].item, recipe.itemsForRecipe[i].count);
+                bool AreItemsInEQ = CheckForItems(Recipes[j].itemsForRecipe[i].item, Recipes[j].itemsForRecipe[i].count);
                 if (AreItemsInEQ == false) 
                 {
-                    Debug.Log("nie ma na " + recipe.Product.name);
-                    return; 
+                    NoIngredients = true;
+                    RecipesOnCanva[j].ingredientsOnCanva[i].ingredientCount.color = Color.red;
                 }
-
+                else 
+                {
+                    RecipesOnCanva[j].ingredientsOnCanva[i].ingredientCount.color = Color.green;
+                }
             }
-            Debug.Log("SA ITEMKI NA " + recipe.Product.name);
+
+            if(NoIngredients == false)
+            {
+                RecipesOnCanva[j].name.color = Color.green;
+            }
+            else
+            {
+                RecipesOnCanva[j].name.color = Color.red;
+            }
         }
     }
 }

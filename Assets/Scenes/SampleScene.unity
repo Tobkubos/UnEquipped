@@ -830,9 +830,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f2ba637d492c2f4c999a6f75048a83d, type: 2}
   - {fileID: 11400000, guid: 8e36b53fec1d66e498b2824ef7e1a711, type: 2}
   - {fileID: 11400000, guid: a782d7f15b28c9343a2327faeeb65513, type: 2}
+  RecipesOnCanva: []
   RecipeList: {fileID: 398705130}
   RecipeTemplate: {fileID: 3748195168705316532, guid: 5e3eb0716b4496c448d708de9423e8e8,
     type: 3}
+  EQManager: {fileID: 148941228}
 --- !u!4 &273420576
 Transform:
   m_ObjectHideFlags: 0
@@ -1439,6 +1441,7 @@ GameObject:
   - component: {fileID: 398705134}
   - component: {fileID: 398705133}
   - component: {fileID: 398705132}
+  - component: {fileID: 398705135}
   m_Layer: 5
   m_Name: Recipes
   m_TagString: Untagged
@@ -1529,6 +1532,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398705130}
   m_CullTransparentMesh: 1
+--- !u!114 &398705135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398705130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305680cf526e76f4d85e96d1174dc541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

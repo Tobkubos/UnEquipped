@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 public class Dropper : MonoBehaviour, IDropHandler
 {
     private EQManager EQManager;
+    private RecipeManager RecipeManager;
     private void Start()
     {
         EQManager = GameObject.Find("EQManager").GetComponent<EQManager>();
+        RecipeManager = GameObject.Find("RecipeManager").GetComponent<RecipeManager>();
     }
     public void OnDrop(PointerEventData eventData)
     {
@@ -20,6 +22,7 @@ public class Dropper : MonoBehaviour, IDropHandler
             EQManager.OriginalSlot.GetComponent<SlotHolder>().ctext.text = EQManager.OriginalSlot.GetComponent<SlotHolder>().count.ToString();
             EQManager.ItemCursorHolder = null;
             EQManager.UpdateSlots();
+            RecipeManager.CheckIngredients();
         }
     }
 }

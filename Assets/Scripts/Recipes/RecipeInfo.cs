@@ -10,5 +10,5 @@ public class RecipeInfo : MonoBehaviour
     public Image image;
     public GameObject RecipeIngredientsList;
     public GameObject RecipeIngredientTemplate;
-
+    public List<IngredientInfo> ingredientsOnCanva = new List<IngredientInfo>();
 }

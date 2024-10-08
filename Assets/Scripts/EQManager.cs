@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class EQManager : MonoBehaviour
 {
+
+    /// <summary>
+    /// dodac dropienie itemów
+    /// dodac item do eq po scraftowaniu
+    /// wlaczyc guzik jezeli sa itemy do craftingu
+    /// </summary>
     public GameObject[] Slots;
     public List<Item> items = new List<Item>();
     RecipeManager RecipeManager;
@@ -56,7 +62,7 @@ public class EQManager : MonoBehaviour
         }
     }
 
-    public void GiveItem()
+    public void GiveRandomItem()
     {
         int id = Random.Range(1, items.Count);
         for (int i = 0; i < Slots.Length; i++)
@@ -83,5 +89,37 @@ public class EQManager : MonoBehaviour
         }
 
         Debug.Log("FULL EQ");
+    }
+
+    public void GiveItem(Recipe recipe)
+    {
+        for(int i = 0; i<recipe.itemsForRecipe.Length; i++)
+        {
+            int NeededItemCount = recipe.itemsForRecipe[i].count;
+            for(int j = 0; j<Slots.Length; j++)
+            {
+                if (Slots[j].GetComponent<SlotHolder>().item.id == recipe.itemsForRecipe[i].item.id && NeededItemCount > 0)
+                {
+                    if (Slots[j].GetComponent<SlotHolder>().count - NeededItemCount >= 0 )
+                    {
+                        int t = Slots[j].GetComponent<SlotHolder>().count;
+                        Slots[j].GetComponent<SlotHolder>().count -= NeededItemCount;
+                        NeededItemCount -= t;
+                        if (Slots[j].GetComponent<SlotHolder>().count == 0)
+                        {
+                            Slots[j].GetComponent<SlotHolder>().item = items[0];
+                        }
+                    }
+                    else
+                    {
+                        NeededItemCount -= Slots[j].GetComponent<SlotHolder>().count;
+                        Slots[j].GetComponent<SlotHolder>().count = 0;
+                        Slots[j].GetComponent<SlotHolder>().item = items[0];
+                    }
+                    UpdateSlots();
+
+                }
+            }
+        }
     }
 }
