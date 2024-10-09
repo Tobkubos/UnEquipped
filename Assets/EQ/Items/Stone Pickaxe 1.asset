@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee845312e4201b14b9817279b503815e, type: 3}
   m_Name: Stone Pickaxe 1
   m_EditorClassIdentifier: 
-  id: 0
+  id: 100
   name: Stone Pickaxe
-  stackSize: 0
+  stackSize: 1
   icon: {fileID: 21300000, guid: 220321e0cb4b9134cbbdbba6d68ae228, type: 3}

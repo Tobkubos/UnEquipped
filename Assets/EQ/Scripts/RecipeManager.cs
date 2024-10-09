@@ -53,7 +53,7 @@ public class RecipeManager : MonoBehaviour
             int index = i;
             RecipeTemp.GetComponent<RecipeInfo>().image.GetComponent<Button>().onClick.AddListener(() => {
                 Debug.Log("PREPARING ITEM " + Recipes[index].Product.name);
-                EQManager.GiveItem(Recipes[index]);
+                EQManager.CraftItem(Recipes[index]);
             });
 
             for (int j = 0; j < Recipes[i].itemsForRecipe.Length; j++)
@@ -91,10 +91,12 @@ public class RecipeManager : MonoBehaviour
             if(NoIngredients == false)
             {
                 RecipesOnCanva[j].name.color = Color.green;
+                RecipesOnCanva[j].image.GetComponent<Button>().interactable = true;
             }
             else
             {
                 RecipesOnCanva[j].name.color = Color.red;
+                RecipesOnCanva[j].image.GetComponent<Button>().interactable = false;
             }
         }
     }

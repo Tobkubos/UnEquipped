@@ -62,6 +62,7 @@ public class EQManager : MonoBehaviour
         }
     }
 
+    //CHANGE TO GIVEITEM AND AS ARGUMENT PUT "Item item", change id to item.id
     public void GiveRandomItem()
     {
         int id = Random.Range(1, items.Count);
@@ -91,7 +92,7 @@ public class EQManager : MonoBehaviour
         Debug.Log("FULL EQ");
     }
 
-    public void GiveItem(Recipe recipe)
+    public void CraftItem(Recipe recipe)
     {
         for(int i = 0; i<recipe.itemsForRecipe.Length; i++)
         {
@@ -117,9 +118,40 @@ public class EQManager : MonoBehaviour
                         Slots[j].GetComponent<SlotHolder>().item = items[0];
                     }
                     UpdateSlots();
-
+                    RecipeManager.CheckIngredients();
                 }
             }
         }
+
+
+
+
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            if (Slots[i].GetComponent<SlotHolder>().item.id == recipe.Product.id && Slots[i].GetComponent<SlotHolder>().count < Slots[i].GetComponent<SlotHolder>().item.stackSize)
+            {
+                Slots[i].GetComponent<SlotHolder>().count += 1;
+                UpdateSlots();
+                RecipeManager.CheckIngredients();
+                return;
+            }
+        }
+
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            if (Slots[i].GetComponent<SlotHolder>().item.id == 0)
+            {
+                Slots[i].GetComponent<SlotHolder>().item = recipe.Product;
+                Slots[i].GetComponent<SlotHolder>().count += 1;
+                UpdateSlots();
+                RecipeManager.CheckIngredients();
+                return;
+            }
+        }
+
+        //INSTANTIATE OBJECT TO PICK UP IN WORLD
+        Debug.Log("FULL EQ");
+
+
     }
 }

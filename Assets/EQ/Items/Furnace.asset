@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 200
   name: Furnace
-  stackSize: 8
-  icon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  stackSize: 14
+  icon: {fileID: 21300000, guid: 332903f0873b40049a9a303b1971ebc7, type: 3}
