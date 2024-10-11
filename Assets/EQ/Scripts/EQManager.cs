@@ -8,8 +8,6 @@ public class EQManager : MonoBehaviour
 
     /// <summary>
     /// dodac dropienie itemów
-    /// dodac item do eq po scraftowaniu
-    /// wlaczyc guzik jezeli sa itemy do craftingu
     /// </summary>
     public GameObject[] Slots;
     public List<Item> items = new List<Item>();
@@ -27,15 +25,6 @@ public class EQManager : MonoBehaviour
             Slots[i].GetComponent<SlotHolder>().item = items[0];
             Slots[i].GetComponent<SlotHolder>().ctext.text = "";
         }
-
-        /*
-        Slots[0].GetComponent<SlotHolder>().item = items[1];
-        Slots[1].GetComponent<SlotHolder>().item = items[2];
-        Slots[2].GetComponent<SlotHolder>().item = items[2];
-        Slots[3].GetComponent<SlotHolder>().item = items[2];
-        Slots[4].GetComponent<SlotHolder>().item = items[2];
-        */
-
         UpdateSlots();
 
         for (int i = 0; i < Slots.Length; i++) 
@@ -53,7 +42,14 @@ public class EQManager : MonoBehaviour
             if (Slots[i].GetComponent<SlotHolder>().item != null)
             {
                 Slots[i].GetComponent<Image>().sprite = Slots[i].GetComponent<SlotHolder>().item.icon;
-                Slots[i].GetComponent<SlotHolder>().ctext.text = Slots[i].GetComponent<SlotHolder>().count.ToString();
+                if (Slots[i].GetComponent<SlotHolder>().item.stackSize <= 1)
+                {
+                    Slots[i].GetComponent<SlotHolder>().ctext.text = "";
+                }
+                else
+                {
+                    Slots[i].GetComponent<SlotHolder>().ctext.text = Slots[i].GetComponent<SlotHolder>().count.ToString();
+                }
             }
             else
             {
@@ -62,7 +58,6 @@ public class EQManager : MonoBehaviour
         }
     }
 
-    //CHANGE TO GIVEITEM AND AS ARGUMENT PUT "Item item", change id to item.id
     public void GiveRandomItem()
     {
         int id = Random.Range(1, items.Count);

@@ -44,7 +44,16 @@ public class SlotHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             icon.sprite = item.icon;
             temp = Instantiate(icon, EQCanva.transform);
             temp.transform.position = eventData.position;
-            temp.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = EQManager.OriginalCount.ToString();
+
+            if(item.stackSize <= 1)
+            {
+                temp.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+            }
+            else
+            {
+                temp.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = EQManager.OriginalCount.ToString();            
+            }
+
             temp.raycastTarget = false;
             EQManager.ItemCursorHolder = item;
             item = EQManager.items[0];

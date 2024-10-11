@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class RecipeInfo : MonoBehaviour
 {
+    public Recipe Recipe;
     public TextMeshProUGUI name;
     public Image image;
     public GameObject RecipeIngredientsList;

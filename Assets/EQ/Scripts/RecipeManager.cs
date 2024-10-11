@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,17 @@ using UnityEngine.UI;
 public class RecipeManager : MonoBehaviour
 {
     public Recipe[] Recipes;
-    public List<RecipeInfo> RecipesOnCanva = new List<RecipeInfo>(); 
+    public RecipeFolder[] RecipeFolders;
+    public List<RecipeInfo> RecipesOnCanva = new List<RecipeInfo>();
+    public List<GameObject> RecipeFoldersOnCanva = new List<GameObject>();
 
-
-    public GameObject RecipeList;
+    public GameObject FolderList;
+    public GameObject FolderMenu;
     public GameObject RecipeTemplate;
+    public GameObject RecipeFolderTemplate;
+    public GameObject RecipeFolderIconTemplate;
     bool NoIngredients;
     public EQManager EQManager;
-    private void Awake()
-    {
-        //ShowRecipes();
-        //CheckIngredients();
-    }
 
 
     public bool CheckForItems(Item item, int count)
@@ -42,7 +42,8 @@ public class RecipeManager : MonoBehaviour
 
 
     public void ShowRecipes()
-    {
+    {   
+        /*
         for(int i = 0; i<Recipes.Length; i++)
         {
             GameObject RecipeTemp = Instantiate(RecipeTemplate, RecipeList.transform);
@@ -63,9 +64,58 @@ public class RecipeManager : MonoBehaviour
                 ingredient.GetComponent<IngredientInfo>().ingredientImage.sprite = Recipes[i].itemsForRecipe[j].item.icon;
                 RecipeTemp.GetComponent<RecipeInfo>().ingredientsOnCanva.Add(ingredient.GetComponent<IngredientInfo>());
                 //RecipeTemp.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 70);
-            }
-            
+            }  
         }
+        */
+
+        for(int i = 0;i < RecipeFolders.Count(); i++)
+        {
+            GameObject recipeFolderIcon = Instantiate(RecipeFolderIconTemplate, FolderMenu.transform);
+            recipeFolderIcon.GetComponent<Image>().sprite = RecipeFolders[i].Recipes[0].Product.icon;
+
+            GameObject recipeFolder = Instantiate(RecipeFolderTemplate, FolderList.transform);
+            RecipeFoldersOnCanva.Add(recipeFolder);    
+            recipeFolderIcon.GetComponent<Button>().onClick.AddListener(() =>
+            {
+               for (int f = 0; f<RecipeFoldersOnCanva.Count; f++)
+                {
+                    RecipeFoldersOnCanva[f].SetActive(false);        
+                }
+               recipeFolder.SetActive(true);
+            });
+
+
+            recipeFolder.GetComponent<ReParent>().Content.GetComponent<RectTransform>().sizeDelta += new Vector2(0, (RecipeFolders[i].Recipes.Length * 90f)+25f);
+            for (int j = 0; j < RecipeFolders[i].Recipes.Length; j++) 
+            {
+                GameObject RecipeTemp = Instantiate(RecipeTemplate, recipeFolder.GetComponent<ReParent>().recipesParent.transform);
+                RecipeInfo RecInf = RecipeTemp.GetComponent<RecipeInfo>();
+                RecInf.Recipe = RecipeFolders[i].Recipes[j];
+                RecInf.name.text = RecInf.Recipe.Product.name;
+                RecInf.image.sprite = RecInf.Recipe.Product.icon;
+
+                int indexi = i;
+                int indexj = j;
+                RecInf.image.GetComponent<Button>().onClick.AddListener(() => {
+                    Debug.Log("PREPARING ITEM " + RecInf.Recipe.Product.name);
+                    EQManager.CraftItem(RecInf.Recipe);
+                });
+
+                for (int k = 0; k < RecipeFolders[i].Recipes[j].itemsForRecipe.Length; k++)
+                {
+                    GameObject ingredient = Instantiate(RecipeTemp.GetComponent<RecipeInfo>().RecipeIngredientTemplate, RecipeTemp.GetComponent<RecipeInfo>().RecipeIngredientsList.transform);
+                    IngredientInfo IngInf = ingredient.GetComponent<IngredientInfo>();
+                    IngInf.ingredientCount.text = "x" + RecInf.Recipe.itemsForRecipe[k].count;
+                    IngInf.ingredientImage.sprite = RecInf.Recipe.itemsForRecipe[k].item.icon;
+                    RecInf.ingredientsOnCanva.Add(ingredient.GetComponent<IngredientInfo>());
+                    //RecipeTemp.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 70);
+                }
+
+
+                RecipesOnCanva.Add(RecipeTemp.GetComponent<RecipeInfo>());
+            }
+        }
+        
     }
 
     public void CheckIngredients()
@@ -74,9 +124,9 @@ public class RecipeManager : MonoBehaviour
         for(int j = 0; j< RecipesOnCanva.Count; j++)
         {
             NoIngredients = false;
-            for(int i = 0; i< RecipesOnCanva[j].ingredientsOnCanva.Count; i++ )
+            for(int i = 0; i< RecipesOnCanva[j].Recipe.itemsForRecipe.Length; i++ )
             {
-                bool AreItemsInEQ = CheckForItems(Recipes[j].itemsForRecipe[i].item, Recipes[j].itemsForRecipe[i].count);
+                bool AreItemsInEQ = CheckForItems(RecipesOnCanva[j].Recipe.itemsForRecipe[i].item, RecipesOnCanva[j].Recipe.itemsForRecipe[i].count);
                 if (AreItemsInEQ == false) 
                 {
                     NoIngredients = true;
