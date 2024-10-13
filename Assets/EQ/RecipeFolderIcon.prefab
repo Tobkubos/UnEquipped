@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8931248689541855551}
   - component: {fileID: 6344297549411758766}
   - component: {fileID: 8407428238578539846}
+  - component: {fileID: 1141913791354993826}
   m_Layer: 5
   m_Name: RecipeFolderIcon
   m_TagString: Untagged
@@ -120,3 +121,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1141913791354993826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549732998136672332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305680cf526e76f4d85e96d1174dc541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
